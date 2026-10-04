@@ -499,6 +499,10 @@ button:hover{ filter:brightness(1.12); }
   border:1px solid #c98a8a; background:#f6e2e2; color:#7a3b3b;
   padding:10px 12px; border-radius:2px; margin-bottom:12px;
 }
+.notice{
+  border:1px solid #a8bfa0; background:#eef4ea; color:#3f5238;
+  padding:10px 12px; border-radius:2px; margin-bottom:12px;
+}
 .hint{ color:var(--ink-soft); font-size:12px; margin-top:12px; }
 .meta-form{ display:flex; flex-direction:column; gap:6px; }
 .meta-form input, .meta-form select{ padding:6px 8px; font-size:13px; }

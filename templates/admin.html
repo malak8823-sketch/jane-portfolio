@@ -7,6 +7,10 @@
       <a class="link" href="/">На сайт</a>
     </div>
 
+    {% if flash %}
+      <div class="{{ 'error' if flash.k == 'error' else 'notice' }}">{{ flash.t }}</div>
+    {% endif %}
+
     <h3>Загрузить работу</h3>
 
     <form method="post" action="/admin/upload" enctype="multipart/form-data" class="form">
