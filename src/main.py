@@ -356,10 +356,10 @@ async def index(request: Request):
         {
             "request": request,
             "works": works,
-            "site_title": os.getenv("PORTFOLIO_SITE_TITLE", "Artist Portfolio"),
+            "site_title": os.getenv("PORTFOLIO_SITE_TITLE", "JaneM"),
             "site_desc": os.getenv(
                 "PORTFOLIO_SITE_DESC",
-                "Портфолио цифровых рисунков. Добавляйте новые работы через админку.",
+                "художник-иллюстратор",
             ),
         },
     )
