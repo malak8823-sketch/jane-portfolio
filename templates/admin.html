@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="admin">
+    <div class="admin__top">
+      <h2>Админ панель</h2>
+      <a class="link" href="/">На сайт</a>
+    </div>
+
+    <h3>Загрузить работу</h3>
+
+    <form method="post" action="/admin/upload" enctype="multipart/form-data" class="form">
+      <label>
+        Изображение (PNG/JPG)
+        <input type="file" name="file" accept="image/png,image/jpeg" required />
+      </label>
+      <label>
+        Название работы
+        <input type="text" name="title" placeholder="Например: Английский сад" />
+      </label>
+      <label>
+        Техника и год
+        <input type="text" name="tech" placeholder="Например: Акварель, 2024" />
+      </label>
+      <label>
+        Категория
+        <select name="category">
+          <option value="">— без категории —</option>
+          <option value="Пейзажи">Пейзажи</option>
+          <option value="Ботаника">Ботаника</option>
+          <option value="Интерьеры">Интерьеры</option>
+          <option value="Открытки">Открытки</option>
+        </select>
+      </label>
+      <button type="submit">Загрузить</button>
+    </form>
+
+    <h3>Сейчас в галерее</h3>
+    <div class="grid">
+      {% for item in works %}
+        <figure class="card" data-category="{{ item.category or '' }}">
+          <img class="thumb" src="/protected/{{ item.name }}" alt="{{ item.title or item.name }}" loading="lazy" />
+          <figcaption class="cap">
+            <form method="post" action="/admin/meta" class="meta-form">
+              <input type="hidden" name="name" value="{{ item.name }}" />
+              <input type="text" name="title" value="{{ item.title }}" placeholder="Название" />
+              <input type="text" name="tech" value="{{ item.tech }}" placeholder="Техника, год" />
+              <select name="category">
+                <option value="" {% if not item.category %}selected{% endif %}>— без категории —</option>
+                <option value="Пейзажи" {% if item.category == 'Пейзажи' %}selected{% endif %}>Пейзажи</option>
+                <option value="Ботаника" {% if item.category == 'Ботаника' %}selected{% endif %}>Ботаника</option>
+                <option value="Интерьеры" {% if item.category == 'Интерьеры' %}selected{% endif %}>Интерьеры</option>
+                <option value="Открытки" {% if item.category == 'Открытки' %}selected{% endif %}>Открытки</option>
+              </select>
+              <button type="submit">Сохранить</button>
+            </form>
+            <form method="post" action="/admin/delete" class="delete-form" onsubmit="return confirm('Удалить эту работу и её оригинал без возможности восстановления?');">
+              <input type="hidden" name="name" value="{{ item.name }}" />
+              <button type="submit" class="delete-button">Удалить работу</button>
+            </form>
+          </figcaption>
+        </figure>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}

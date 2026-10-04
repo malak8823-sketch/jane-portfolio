@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="auth">
+    <h2>Админ-вход</h2>
+
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="post" action="/login" class="form">
+      <label>
+        Логин
+        <input name="username" autocomplete="username" value="admin" />
+      </label>
+      <label>
+        Пароль
+        <input name="password" type="password" autocomplete="current-password" />
+      </label>
+      <button type="submit">Войти</button>
+    </form>
+
+    <p class="hint">
+      Сначала настройте пароль админа через переменные окружения:
+      <code>PORTFOLIO_ADMIN_PASSWORD</code> (или <code>PORTFOLIO_ADMIN_PASSWORD_HASH</code>).
+    </p>
+  </section>
+{% endblock %}
